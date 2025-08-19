@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Groove Music</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f8f8f8;
+        color: #111;
+    }
+
+    /* Navbar */
+    nav {
+        background: #111;
+        color: white;
+        display: flex;
+        align-items: center;
+        padding: 10px 5px;
+        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+    }
+    nav .logo {
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: 20px;
+    }
+
+    /* Center container for search bar */
+    .nav-center {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Search bar */
+    .search-bar {
+        width: 400px;
+        max-width: 100%;
+        padding: 10px 20px;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+    nav ul li {
+        margin: 0 10px;
+    }
+   nav ul li a {
+    color: white;
+    text-decoration: none !important; /* force remove underline */
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+    display: inline-block; /* helps keep hover styles clean */
+}
+
+nav ul li a:hover {
+    background: white; /* highlight background on hover */
+    color: black;
+    text-decoration: none !important; /* keep underline gone */
+}
+
+    .btn {
+        background: #ff4757;
+    }
+    .btn:hover {
+        background: #f8f8f8;
+    }
+    nav ul li a:hover {
+        text-decoration: underline;
+    }
+
+    /* Hero Carousel */
+    .hero-container {
+        margin-top: 60px; /* more space below navbar */
+        position: relative;
+        width: 100%;
+        height: 80vh;
+        overflow: hidden;
+    }
+    .hero-slide {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 60px;
+        color: white;
+        transition: left 1s ease-in-out;
+    }
+    .hero-slide.active {
+        left: 0;
+    }
+    .hero-slide.prev {
+        left: -100%;
+    }
+    .hero-slide h1 {
+        font-size: 52px;
+        margin: 0 0 20px;
+    }
+    .hero-slide p {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    .hero-slide .cta-btn {
+        display: inline-block;
+        background: #ff4757;
+        padding: 12px 28px;
+        font-size: 18px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: white;
+        width: auto;      /* makes button fit text */
+        max-width: 220px; /* keeps them short */
+        text-align: center;
+    }
+    .hero-slide .cta-btn:hover {
+        background: white;
+        color: black;
+        transition: background 0.3s, color 0.3s;
+    }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">Groove</div>
+    
+    <!-- Search Bar Centered -->
+    <div class="nav-center">
+        <input type="text" class="search-bar" placeholder="Search albums or playlists...">
+    </div>
+    
+    <ul>
+        <li><a href="My-Album.html">Albums</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="record.html">Record</a></li>
+        <li><a href="sign-up.html" class="btn">Sign Up</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Carousel -->
+<div class="hero-container">
+    <div class="hero-slide active" style="background-image: url('Headphone.png');">
+        <h1>Discover. <br> Get Discovered.</h1>
+        <p>Find songs that suit your style or create yours.</p>
+        <a href="song.html" class="cta-btn">Start Listening</a>
+    </div>
+    <div class="hero-slide" style="background-image: url('Headphones.jpg');">
+        <h1>Trending Now</h1>
+        <p>Stay ahead with the hottest tracks.</p>
+        <a href="My-Album.html" class="cta-btn">Explore</a>
+    </div>
+    <div class="hero-slide" style="background-image: url('rn.png');">
+        <h1>Discover Artists</h1>
+        <p>Listen to rising stars and hidden gems.</p>
+        <a href="record.html" class="cta-btn">Discover</a>
+    </div>
+</div>
+
+<script>
+    let slides = document.querySelectorAll('.hero-slide');
+    let current = 0;
+
+    function showNextSlide() {
+        slides[current].classList.remove('active');
+        slides[current].classList.add('prev');
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.remove('prev');
+        slides[current].classList.add('active');
+    }
+
+    setInterval(showNextSlide, 5000); // change every 5 seconds
+</script>
+
+</body>
+</html>
