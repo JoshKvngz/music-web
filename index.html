@@ -1,199 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Groove Music</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Landing Page</title>
+  <style>
     body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f8f8f8;
-        color: #111;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
     }
 
     /* Navbar */
     nav {
-        background: #111;
-        color: white;
-        display: flex;
-        align-items: center;
-        padding: 10px 5px;
-        justify-content: space-between;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 10;
+      background: white;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
     nav .logo {
-        font-size: 24px;
-        font-weight: bold;
-        margin-right: 20px;
+      font-weight: bold;
+      font-size: 20px;
+      color: #111;
     }
 
-    /* Center container for search bar */
-    .nav-center {
-        flex: 1;
-        display: flex;
-        justify-content: center;
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(to right, #0b0c10, #232526);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
     }
 
-    /* Search bar */
-    .search-bar {
-        width: 400px;
-        max-width: 100%;
-        padding: 10px 20px;
-        border-radius: 25px;
-        border: none;
-        outline: none;
-        font-size: 16px;
+    .hero span {
+      background: #111;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 14px;
+      display: inline-block;
+      margin-bottom: 20px;
     }
 
-    nav ul {
-        list-style: none;
-        display: flex;
-        margin: 0;
-        padding: 0;
-    }
-    nav ul li {
-        margin: 0 10px;
-    }
-   nav ul li a {
-    color: white;
-    text-decoration: none !important; /* force remove underline */
-    padding: 6px 12px;
-    border-radius: 5px;
-    transition: background 0.3s, color 0.3s;
-    display: inline-block; /* helps keep hover styles clean */
-}
-
-nav ul li a:hover {
-    background: white; /* highlight background on hover */
-    color: black;
-    text-decoration: none !important; /* keep underline gone */
-}
-
-    .btn {
-        background: #ff4757;
-    }
-    .btn:hover {
-        background: #f8f8f8;
-    }
-    nav ul li a:hover {
-        text-decoration: underline;
+    .hero h1 {
+      font-size: 36px;
+      margin: 0;
     }
 
-    /* Hero Carousel */
-    .hero-container {
-        margin-top: 60px; /* more space below navbar */
-        position: relative;
-        width: 100%;
-        height: 80vh;
-        overflow: hidden;
+    .hero p {
+      font-size: 18px;
+      color: #d1d1d1;
+      margin-top: 10px;
     }
-    .hero-slide {
-        position: absolute;
-        top: 0;
-        left: 100%;
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0 60px;
-        color: white;
-        transition: left 1s ease-in-out;
+
+    /* Audio Card */
+    .audio-card {
+      background: white;
+      max-width: 800px;
+      margin: -40px auto 20px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+      position: relative;
     }
-    .hero-slide.active {
-        left: 0;
+
+    .card-content {
+      display: flex;
+      align-items: center;
     }
-    .hero-slide.prev {
-        left: -100%;
+
+    .audio-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 4px;
+      margin-right: 20px;
+      object-fit: cover;
     }
-    .hero-slide h1 {
-        font-size: 52px;
-        margin: 0 0 20px;
+
+    .audio-info {
+      flex: 1;
     }
-    .hero-slide p {
-        font-size: 20px;
-        margin-bottom: 20px;
+
+    .audio-info h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #111;
     }
-    .hero-slide .cta-btn {
-        display: inline-block;
-        background: #ff4757;
-        padding: 12px 28px;
-        font-size: 18px;
-        border-radius: 6px;
-        text-decoration: none;
-        color: white;
-        width: auto;      /* makes button fit text */
-        max-width: 220px; /* keeps them short */
-        text-align: center;
+
+    .audio-info p {
+      margin: 4px 0 14px;
+      color: #666;
     }
-    .hero-slide .cta-btn:hover {
-        background: white;
-        color: black;
-        transition: background 0.3s, color 0.3s;
+
+    /* Audio player */
+    .controls {
+      margin-top: 10px;
     }
-</style>
+    audio {
+      width: 100%;
+      outline: none;
+    }
+
+    /* Lyrics toggle */
+    .lyrics-toggle {
+      text-align: center;
+      font-size: 14px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      user-select: none;
+      color: #333;
+    }
+
+    .lyrics {
+      display: none;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #333;
+      text-align: center; /* Center lyrics */
+      white-space: pre-line;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav>
-    <div class="logo">Groove</div>
-    
-    <!-- Search Bar Centered -->
-    <div class="nav-center">
-        <input type="text" class="search-bar" placeholder="Search albums or playlists...">
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">L U M O</div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <span>⚡ Audio of the day</span>
+    <h1>Leave My Light</h1>
+    <p>Never give up</p>
+  </div>
+
+  <!-- Audio Card -->
+  <div class="audio-card">
+    <div class="card-content">
+      <img src="Leave My Light album Cover.png" alt="Album Art">
+      <div class="audio-info">
+        <h2>Leave My Light</h2>
+        <p>Emotional, Inspirational Rap</p>
+        <div class="controls">
+          <audio id="audio" controls>
+            <source src="Leave my Light.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
     </div>
-    
-    <ul>
-        <li><a href="My-Album.html">Albums</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="record.html">Record</a></li>
-        <li><a href="sign-up.html" class="btn">Sign Up</a></li>
-    </ul>
-</nav>
+  </div>
 
-<!-- Hero Carousel -->
-<div class="hero-container">
-    <div class="hero-slide active" style="background-image: url('Headphone.png');">
-        <h1>Discover. <br> Get Discovered.</h1>
-        <p>Find songs that suit your style or create yours.</p>
-        <a href="song.html" class="cta-btn">Start Listening</a>
-    </div>
-    <div class="hero-slide" style="background-image: url('Headphones.jpg');">
-        <h1>Trending Now</h1>
-        <p>Stay ahead with the hottest tracks.</p>
-        <a href="My-Album.html" class="cta-btn">Explore</a>
-    </div>
-    <div class="hero-slide" style="background-image: url('rn.png');">
-        <h1>Discover Artists</h1>
-        <p>Listen to rising stars and hidden gems.</p>
-        <a href="record.html" class="cta-btn">Discover</a>
-    </div>
-</div>
+  <!-- Lyrics Toggle -->
+  <div class="lyrics-toggle" id="lyricsToggle">Show</div>
+  <div class="lyrics" id="lyrics">
+    (Verse 1)
+Yeah, I been climbin' up a mountain no one sees but me
+Tryna paint a picture of the man I wanna be
+Got dreams in my pocket and hope in my chest
+Took the long road here, now I’m feelin' blessed
 
-<script>
-    let slides = document.querySelectorAll('.hero-slide');
-    let current = 0;
+Told my mama, “One day I’ma light up the sky”
+Even if I fall, I was born to try
+Gotta write my story, leave it in the stars
+So when I’m gone, you remember who I are
 
-    function showNextSlide() {
-        slides[current].classList.remove('active');
-        slides[current].classList.add('prev');
+(Pre-Chorus)
+They said it’s too big, they said I won't last
+But I broke through walls, left doubt in the past
+I ain’t made it yet, but I’m on that track
+Lookin’ forward—ain’t never lookin’ back
 
-        current = (current + 1) % slides.length;
+(Chorus)
+If I leave my light, will you carry it on?
+When the nights get cold, will you sing my song?
+I just wanna leave something they can feel
+So they know my heart was always real
+Yeah, I just wanna leave my light
+I just wanna leave my light
 
-        slides[current].classList.remove('prev');
-        slides[current].classList.add('active');
-    }
+(Verse 2)
+I remember sittin’ in a dorm with a pen
+Dreamin' 'bout stages I ain’t seen yet then
+Now I'm standin’ here, and the lights are bright
+And I’m tryna hold on to this feelin’ tight
 
-    setInterval(showNextSlide, 5000); // change every 5 seconds
-</script>
+I ain't perfect, but I'm true to my name
+Learned from the losses, danced in the rain
+And if I touch one soul, that’s more than fame
+'Cause I came to inspire, not just entertain
+
+(Pre-Chorus)
+They said it’s too hard, they said to play small
+But I see big things when I dream at all
+I’ma keep goin’ even if I crawl
+I was made to rise, I was born to brawl
+
+(Chorus)
+If I leave my light, will you carry it on?
+When the nights get cold, will you sing my song?
+I just wanna leave something they can feel
+So they know my heart was always real
+Yeah, I just wanna leave my light
+I just wanna leave my light
+
+(Bridge – spoken softly)
+This ain’t just about me
+It’s for the ones who’ve been told they can’t
+The ones who feel invisible
+You’re not... you’re powerful
+
+(Final Chorus – more intense)
+If I leave my light, will you carry it on?
+When the nights get cold, will you sing my song?
+I just wanna leave something they can feel
+So they know my heart was always real
+Yeah, I just wanna leave my light
+Let me leave my light
+Let me leave my li-i-ight...
+  </div>
+
+  <script>
+    // Lyrics toggle
+    const lyricsToggle = document.getElementById('lyricsToggle');
+    const lyrics = document.getElementById('lyrics');
+    let lyricsVisible = false;
+
+    lyricsToggle.addEventListener('click', () => {
+      lyricsVisible = !lyricsVisible;
+      if (lyricsVisible) {
+        lyrics.style.display = 'block';
+        lyricsToggle.textContent = "Hide";
+      } else {
+        lyrics.style.display = 'none';
+        lyricsToggle.textContent = "Show";
+      }
+    });
+  </script>
 
 </body>
 </html>
