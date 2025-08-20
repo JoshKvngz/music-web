@@ -1,209 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Playing - Groove</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Landing Page</title>
+
+  <!-- Google Font for handwritten style -->
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+  <style>
     body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f8f8f8;
-        text-align: center;
-        padding-top: 70px; /* space for navbar */
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
     }
 
-    /* Navbar Styles */
+    /* Navbar */
     nav {
-        background-color: #333;
-        color: white;
-        padding: 10px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
+      background: white;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    nav .logo {
+      font-weight: bold;
+      font-size: 20px;
+      color: #111;
+      font-family: 'Playfair Display', serif;
     }
 
-    .logo {
-        font-size: 24px;
-        font-weight: bold;
+    /* Navbar Links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: 0.3s;
+      position: relative;
+      padding-bottom: 4px;
     }
 
-    nav ul {
-        list-style: none;
-        display: flex;
-        margin: 0;
-        padding: 0;
+    /* About Us + Products */
+    .nav-links .link {
+      color: #111;
+    }
+    .nav-links .link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: black;
+      transition: width 0.3s ease;
+    }
+    .nav-links .link:hover::after {
+      width: 100%;
     }
 
-    nav ul li {
-        margin: 0 10px;
+    /* Sign Up button */
+    .nav-links .signup {
+      background: #111;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+    }
+    .nav-links .signup:hover {
+      background: #F8F8F8;
+      color: #111;
+      border: black 1px solid;
     }
 
-    nav ul li a {
-        color: white;
-        text-decoration: none;
-        font-size: 16px;
+    /* About Section */
+    .about {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .about h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #111;
+    }
+    .about p {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .about-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .about-images img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    nav ul li a:hover {
-        text-decoration: underline;
+    /* Footer */
+    footer {
+      background: white;
+      padding: 20px 30px;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      color: #555;
+      font-size: 14px;
     }
-
-    .search-bar {
-        padding: 5px 10px;
-        border-radius: 20px;
-        border: none;
-        outline: none;
+    footer a {
+      color: #111;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: 0.3s;
     }
-
-    /* Album cover */
-    .album-cover {
-        width: 300px;
-        height: 300px;
-        object-fit: cover;
-        border-radius: 20px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        margin-top: 30px;
+    footer a:hover {
+      text-decoration: underline;
     }
-
-    /* Controls */
-    .controls {
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        align-items: center;
-    }
-
-    .control-btn {
-        font-size: 40px;
-        cursor: pointer;
-        color: #333;
-        user-select: none;
-    }
-    .control-btn:hover {
-        color: #ff4757;
-    }
-
-    audio {
-        display: block;
-        margin: 20px auto;
-    }
-
-    /* Lyrics */
-    .lyrics-container {
-        margin-top: 40px;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        background: #fff;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        text-align: left;
-    }
-
-    .lyrics-container h2 {
-        margin-top: 0;
-        font-size: 24px;
-    }
-
-    .lyrics {
-        white-space: pre-line;
-        color: #444;
-    }
-</style>
+  </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav>
-    <div class="logo">Groove</div>
-</nav>
-
-<h1>Now Playing: Leave My Light</h1>
-<img src="Leave My Light album Cover.png" alt="Album Cover" class="album-cover">
-
-<!-- Audio Player -->
-<audio id="audioPlayer" controls autoplay>
-    <source src="Leave my Light.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
-<!-- Lyrics -->
-<div class="lyrics-container">
-    <h2>Lyrics</h2>
-    <div class="lyrics">
-        (Verse 1)
-Yeah, I been climbin' up a mountain no one sees but me
-Tryna paint a picture of the man I wanna be
-Got dreams in my pocket and hope in my chest
-Took the long road here, now I’m feelin' blessed
-
-Told my mama, “One day I’ma light up the sky”
-Even if I fall, I was born to try
-Gotta write my story, leave it in the stars
-So when I’m gone, you remember who I are
-
-(Pre-Chorus)
-They said it’s too big, they said I won't last
-But I broke through walls, left doubt in the past
-I ain’t made it yet, but I’m on that track
-Lookin’ forward—ain’t never lookin’ back
-
-(Chorus)
-If I leave my light, will you carry it on?
-When the nights get cold, will you sing my song?
-I just wanna leave something they can feel
-So they know my heart was always real
-Yeah, I just wanna leave my light
-I just wanna leave my light
-
-(Verse 2)
-I remember sittin’ in a dorm with a pen
-Dreamin' 'bout stages I ain’t seen yet then
-Now I'm standin’ here, and the lights are bright
-And I’m tryna hold on to this feelin’ tight
-
-I ain't perfect, but I'm true to my name
-Learned from the losses, danced in the rain
-And if I touch one soul, that’s more than fame
-'Cause I came to inspire, not just entertain
-
-(Pre-Chorus)
-They said it’s too hard, they said to play small
-But I see big things when I dream at all
-I’ma keep goin’ even if I crawl
-I was made to rise, I was born to brawl
-
-(Chorus)
-If I leave my light, will you carry it on?
-When the nights get cold, will you sing my song?
-I just wanna leave something they can feel
-So they know my heart was always real
-Yeah, I just wanna leave my light
-I just wanna leave my light
-
-(Bridge – spoken softly)
-This ain’t just about me
-It’s for the ones who’ve been told they can’t
-The ones who feel invisible
-You’re not... you’re powerful
-
-(Final Chorus – more intense)
-If I leave my light, will you carry it on?
-When the nights get cold, will you sing my song?
-I just wanna leave something they can feel
-So they know my heart was always real
-Yeah, I just wanna leave my light
-Let me leave my light
-Let me leave my li-i-ight...
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">L U M O</div>
+    <div class="nav-links">
+      <a href="index.html" class="link">Home</a>
+      <a href="tour.html" class="link">Tours</a>
+      <a href="products.html" class="link">Products</a>
+      <a href="sign-up.html" class="signup">Sign Up</a>
     </div>
-</div>
+  </nav>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>
+      At LUMO, we bring people closer to the power of sound.  
+      Our mission is to create unforgettable experiences through tours,  
+      products, and events that celebrate music and culture.
+    </p>
+    <div class="about-images">
+      <img src="lil-jaypro.png" alt="About image 1">
+      <img src="founder.png" alt="About image 2">
+      <img src="marv.png" alt="About image 3">
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 LUMO. All rights reserved.</p>
+    <p>
+      <a href="#">Privacy Policy</a> | 
+      <a href="#">Terms of Service</a> | 
+      <a href="#">Contact Us</a>
+    </p>
+  </footer>
+
 </body>
 </html>
-

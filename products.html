@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMO - Products</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+    }
+
+    /* Navbar */
+    nav {
+      background: white;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav .logo {
+      font-weight: bold;
+      font-size: 20px;
+      color: #111;
+      font-family: 'Playfair Display', serif;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: 0.3s;
+      position: relative;
+      padding-bottom: 4px;
+    }
+    .nav-links .link {
+      color: #111;
+    }
+    .nav-links .link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: black;
+      transition: width 0.3s ease;
+    }
+    .nav-links .link:hover::after {
+      width: 100%;
+    }
+    .nav-links .signup {
+      background: #111;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+    }
+    .nav-links .signup:hover {
+      background: #F8F8F8;
+      color: #111;
+      border: black 1px solid;
+    }
+
+    /* Search Box with Dropdown (UNDER nav) */
+    .search-container {
+      padding: 15px;
+      display: flex;
+      justify-content: end;
+      position: sticky;
+      top: 70px; /* sticks just below navbar */
+      z-index: 900;
+      border-bottom: 0px solid #ddd;
+    }
+    .search-box {
+      width: 300px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      outline: none;
+      cursor: pointer;
+    }
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 105px; /* just below search box */
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .dropdown a {
+      display: block;
+      padding: 10px;
+      color: #111;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .dropdown a:hover {
+      background: #111;
+      color: #fff;
+    }
+
+    /* Product Sections */
+    section {
+      padding: 40px 60px;
+    }
+    section h2 {
+      margin-bottom: 20px;
+      font-size: 22px;
+      border-left: 5px solid #111;
+      padding-left: 10px;
+      color: #111;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .product-box {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+    .product-box img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 15px;
+    }
+    .product-info h3 {
+      margin: 10px 0;
+      font-size: 16px;
+      color: #111;
+    }
+    .product-info p {
+      font-size: 14px;
+      color: #555;
+      margin: 5px 0 15px 0;
+    }
+    .product-info button {
+      display: block;
+      width: calc(100% - 30px); /* full width but not touching edges */
+      margin: 0 auto 10px auto;
+      background: #111;
+      color: white;
+      border: none;
+      padding: 10px 0;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 14px;
+    }
+    .product-info button:hover {
+      background: #f5f5f5;
+      color: #111;
+      border: 1px solid #111;
+    }
+
+    /* Footer */
+    footer {
+      background: white;
+      padding: 20px 30px;
+      text-align: center;
+      border-top: 1px solid #ddd;
+      color: #555;
+      font-size: 14px;
+    }
+    footer a {
+      color: #111;
+      text-decoration: none;
+      margin: 0 10px;
+      transition: 0.3s;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">L U M O</div>
+    <div class="nav-links">
+      <a href="index.html" class="link">Home</a>
+      <a href="song.html" class="link">About Us</a>
+      <a href="tour.html" class="link">Tours</a>
+      <a href="sign-up.html" class="signup">Sign Up</a>
+    </div>
+  </nav>
+
+  <!-- Search Box BELOW Navbar -->
+  <div class="search-container">
+    <input type="text" class="search-box" placeholder="Search categories..." readonly>
+    <div class="dropdown">
+      <a href="#clothes">Clothes</a>
+      <a href="#accessories">Accessories</a>
+      <a href="#Stickers">#Stickers</a>
+    </div>
+  </div>
+
+  <!-- Clothes Section -->
+  <section id="clothes">
+    <h2>Clothes</h2>
+    <div class="product-grid">
+      <div class="product-box">
+        <img src="unavailable.png" alt="Shirt">
+        <div class="product-info">
+          <h3>Casual Shirt</h3>
+          <p>$25</p>
+          <button>Purchase</button>
+        </div>
+      </div>
+      <div class="product-box">
+        <img src="unavailable.png" alt="Dress">
+        <div class="product-info">
+          <h3>Summer Dress</h3>
+          <p>$40</p>
+          <button>Purchase</button>
+        </div>
+      </div>
+      <div class="product-box">
+        <img src="unavailable.png" alt="Jacket">
+        <div class="product-info">
+          <h3>Leather Jacket</h3>
+          <p>$120</p>
+          <button>Purchase</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Accessories Section -->
+  <section id="accessories">
+    <h2>Accessories</h2>
+    <div class="product-grid">
+      <div class="product-box">
+        <img src="unavailable.png" alt="Watch">
+        <div class="product-info">
+          <h3>Luxury Watch</h3>
+          <p>$250</p>
+          <button>Purchase</button>
+        </div>
+      </div>
+      <div class="product-box">
+        <img src="unavailable.png" alt="Bag">
+        <div class="product-info">
+          <h3>Handbag</h3>
+          <p>$85</p>
+          <button>Purchase</button>
+        </div>
+      </div>
+      <div class="product-box">
+        <img src="unavailable.png" alt="Sunglasses">
+        <div class="product-info">
+          <h3>Sunglasses</h3>
+          <p>$45</p>
+          <button>Purchase</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- stickers Section -->
+  <section id="#Stickers">
+    <h2>stickers</h2>
+    <div class="product-grid">
+      <div class="product-box">
+        <img src="unavailable.png" alt="Lumo">
+        <div class="product-info">
+          <h3>Lumo Stickers</h3>
+          <p>$99</p>
+          <button>Purchase</button>
+        </div>
+      </div>
+      <div class="product-box">
+        <img src="unavailable.png" alt="Lil-Jay">
+        <div class="product-info">
+          <h3>Lil-Jay Stickers</h3>
+          <p>$65</p>
+          <button>Purchase</button>
+        </div>
+      </div>
+      <div class="product-box">
+        <img src="unavailable.png" alt="Arsenal">
+        <div class="product-info">
+          <h3>Arsenal Stickers</h3>
+          <p>$499</p>
+          <button>Purchase</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 LUMO. All rights reserved.</p>
+    <a href="#">Privacy Policy</a> | 
+    <a href="#">Terms of Service</a>
+  </footer>
+
+  <script>
+    const searchBox = document.querySelector(".search-box");
+    const dropdown = document.querySelector(".dropdown");
+
+    searchBox.addEventListener("click", () => {
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".search-container")) {
+        dropdown.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

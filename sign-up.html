@@ -66,14 +66,16 @@
       padding: 12px;
       border: none;
       border-radius: 8px;
-      background: red;
+      background: black;
       color: white;
       font-size: 16px;
       cursor: pointer;
       margin-top: 18px;
     }
     .btn:hover {
-      background: darkred;
+      color: black;
+      background: white;
+      border: black 1px solid;
     }
     .error {
       color: red;
@@ -100,7 +102,7 @@
       </div>
       <div class="password-container">
         <input type="password" id="password" placeholder="Password">
-        <span class="toggle-password" onclick="togglePassword()">👁️</span>
+        <span class="toggle-password" onclick="togglePassword()"></span>
       </div>
       <button class="btn" onclick="validateForm()">Sign Up</button>
       <div id="error-message" class="error"></div>
