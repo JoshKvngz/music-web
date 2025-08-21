@@ -337,6 +337,13 @@ Let me leave my li-i-ight...
       }
     });
   </script>
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
+	createChat({
+		webhookUrl: 'https://joshuel.app.n8n.cloud/webhook/a1f7a28b-8705-4e88-9fb2-d4292a464e1d/chat'
+	});
+</script>
 </body>
 </html>
